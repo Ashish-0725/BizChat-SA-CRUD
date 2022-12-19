@@ -99,6 +99,9 @@ body{
 }
 
 .home-section nav{
+    position: fixed;
+    width: calc(100% - 240px);
+    left: 240px;
     height: 80px;
     background: #fff;
     padding: 0 20px;
@@ -107,6 +110,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active ~ .home-section nav{
+    width: calc(100% -60px);
+    left: 60px;
 }
 
 .home-section nav .sidebar-button{
@@ -186,4 +195,89 @@ body{
     color: #333;
     font-size: 25px;
 }
+.home-section .home-content{
+    position: relative;
+    padding-top: 100px;
+}
 
+.home-content  .overview-boxes{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.home-content  .overview-boxes .box{
+    width: calc(100% / 4 -15px);
+    background: #fff;
+    padding: 15px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+.home-section .overview-boxes .box .box_topic{
+    font-size: 20px;
+    font-weight: 500;
+} 
+
+.home-section .overview-boxes .box .number{
+    font-size: 35px;
+    font-weight: 500;
+    margin-top: -5px;
+    display: inline-block;  
+} 
+
+.overview-boxes .indicator {
+    display: flex;
+    align-items: center;
+}
+.overview-boxes .indicator i{
+    height: 20px;
+    width: 20px;
+    background: #8fdacb;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: 5px;
+} 
+.overview-boxes .indicator i.down{
+    background: #e87d88;
+}
+.overview-boxes .indicator .text{
+    font-size: 12px;
+}
+.overview-boxes .cart{
+    font-size: 35px;
+    font-weight: 500;
+    height: 50px;
+    width: 50px;
+    background: #cce5ff;
+    color: #66b0ff;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.overview-boxes .box .two{
+   
+    background: #2bd47d;
+    color: #c0f2d8;
+}
+
+.overview-boxes .box .three{
+   
+    background: #ffc233;
+    color: #ffe8b3;
+}
+
+.overview-boxes .box .four{
+    background: #e05260;
+    color: #f7d4d7;
+}
+
+@media (max-width:1216px) {
+    .sidebar{
+        
+    }   
+}
