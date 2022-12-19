@@ -77,3 +77,69 @@ body{
     font-weight: 400;
 
 }
+
+/* homme section */
+.home-section{
+    background: #f5f5f5;
+    position: relative;
+    min-height: 100vh;
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.home-section nav{
+    height: 80px;
+    background: #fff;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-section nav .sidebar-button{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.home-section nav .sidebar-button  i{
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.home-section nav .search-box{
+  width: 550px;
+  height: 50px;
+  margin: 0 20px;
+  position: relative;
+} 
+
+.home-section nav .search-box input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    padding:  0 15px;
+    font-size: 17px;
+    background: #F5f6fa;
+    border: 2px solid #efeef1;
+    outline: none;
+}
+
+.home-section nav .search-box .bx-search{
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    background: #2697ff;
+    transform: translateY(-50%);    
+    border-radius: 6px;
+    color: #fff;
+    font-size: 22px;
+    line-height: 40px;
+    text-align: center;
+}
