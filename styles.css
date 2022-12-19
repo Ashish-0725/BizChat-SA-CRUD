@@ -143,3 +143,36 @@ body{
     line-height: 40px;
     text-align: center;
 }
+
+.home-section nav .profile-details{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    min-width: 190px;
+    background: #efeef1;
+    border: 2px solid #efeef1;
+    border-radius: 6px;
+    padding:0 15px 0 2px;
+}
+
+.home-section nav .profile-details img{
+    height: 40px;
+    width: 40px;
+    object-fit:cover;
+    border-radius: 6px;
+
+}
+
+.home-section nav .profile-details .admin-name{
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 10px;
+    white-space: nowrap;
+}
+
+.home-section nav .profile-details i {
+    color: #333;
+    font-size: 25px;
+}
+
