@@ -17,6 +17,10 @@ body{
     height: 100%;
     width: 240px;
     background: #0a2558;
+    transition: all 0.5s ease;
+}
+.sidebar.active{
+    width: 60px;
 }
 
 .sidebar .logo-details{
@@ -71,6 +75,7 @@ body{
     font-size: 18px;
 }
 
+
 .sidebar .nav-links li a .link_name{
     color: #fff;
     font-size: 15px;
@@ -85,6 +90,12 @@ body{
     min-height: 100vh;
     width: calc(100% - 240px);
     left: 240px;
+    transition: all 0.5s ease;
+}
+
+.sidebar.sidebar.active ~ .home-section {
+    width: calc(100%-60px);
+    left: 60px;
 }
 
 .home-section nav{
