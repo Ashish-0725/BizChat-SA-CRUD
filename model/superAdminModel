@@ -1,0 +1,33 @@
+const mongoose = require("mongoose");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+
+const AdminSchema = mongoose.Schema(
+  {
+    name:String,
+    username: String,
+    password: String
+  },
+  {
+    timestamps: {
+      createdAt: "created_at", // time of docs creation
+      updatedAt: "updated_at", // time of docs updated last time
+    },
+  }
+);
+
+AdminSchema.plugin(passportLocalMongoose);
+const AdminModel = new mongoose.model("admin", AdminSchema);
+
+passport.use(AdminModel.createStrategy());
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  AdminModel.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+module.exports = AdminModel;

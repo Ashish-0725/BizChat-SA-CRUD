@@ -310,3 +310,35 @@ body{
 
     }
 }
+
+.center-of-window{
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 500px;
+    height: 700px;
+    padding-bottom: 20px;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+    padding: 70px 50px 20px 50px;
+    background: #0a2558; color: white;
+}
+
+.center-of-page{   
+display: block;
+margin: auto;
+text-align: center;
+width: 1000px;
+height: 700px;
+padding-bottom: 20px;
+position: absolute;
+top:50%;
+left: 50%;
+transform: translate(-50%, -50%);
+margin: auto;
+padding: 70px 50px 20px 50px;
+color: white;
+}

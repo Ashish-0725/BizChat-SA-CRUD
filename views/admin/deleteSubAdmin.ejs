@@ -1,0 +1,14 @@
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/sideBar.ejs") %>
+
+<div class=" center-of-window">
+<h1>Do you want to delete </h1>
+<h2><%=user.username%> ?</h2>
+<form action="/admin/adminpanel/delete/<%=user._id%>" method="post">
+    <a href="/admin/adminpanel/read" class="btn btn-primary">No</a>
+    <button type="submit" class="btn btn-danger">Yes</button>
+</form>
+</div>
+
+
+<%-include("../partials/footer.ejs") %>

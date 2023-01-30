@@ -1,0 +1,182 @@
+const bcrypt = require("bcrypt");
+const AdminModel = require("../../model/superAdminModel");
+const subAdminModel = require("../../model/subAdminModel");
+const passport = require("passport");
+
+async function getLogin(req, res) {
+  res.render("login");
+}
+module.exports.getLogin = getLogin;
+
+async function postLogin(req, res) {
+  const user = new AdminModel({
+    username: req.body.username,
+    password: req.body.password,
+  });
+  req.login(user, function (err) {
+    if (err) {
+      return res.send(err);
+    }
+    return passport.authenticate("local")(req, res, function () {
+      res.redirect("/admin/adminpanel");
+    });
+  });
+}
+module.exports.postLogin = postLogin;
+
+async function adminpanel(req, res) {
+  res.render("adminpanel");
+}
+module.exports.adminpanel = adminpanel;
+
+async function signup(req, res) {
+  var name = req.body.name;
+  username = req.body.username;
+  password = req.body.password;
+  repeatPassword = req.body.repeatpassword;
+
+  if (password == repeatPassword) {
+    AdminModel.register(
+      {
+        name: name,
+        username: username,
+      },
+      password,
+      function (err, user) {
+        if (err) {
+          console.log(err);
+          res.sendStatus(404).redirect("/admin/login");
+        } else {
+          passport.authenticate("local")(req, res, function () {
+            res.redirect("/admin/login");
+          });
+        }
+      }
+    );
+  } else {
+    res.send("Password and repeat Password should be same");
+  }
+}
+module.exports.signup = signup;
+
+async function logout(req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/admin/login");
+  });
+}
+module.exports.logout = logout;
+
+async function addPage(req, res) {
+  res.render("addSubAdmin");
+}
+module.exports.addPage = addPage;
+
+async function add(req, res) {
+  if (req.body.password == req.body.repeatpassword) {
+    hash = bcrypt.hashSync(req.body.password, 10);
+    const newUser = new subAdminModel({
+      name: req.body.name,
+      description: req.body.description,
+      username: req.body.username,
+      personal_token: req.body.token,
+      password: hash,
+    });
+    newUser.save((err, user) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(404).redirect("/admin/login");
+      } else {
+        req.session.user = user;
+        res.redirect("/admin/adminpanel/read");
+      }
+    });
+  } else {
+    res.sendStatus(404);
+  }
+}
+module.exports.add = add;
+
+async function read(req, res) {
+  subAdminModel.find({}, (err, found) => {
+    if (err) return err;
+    else {
+      if (found) {
+        res.render("viewSubAdmin", { user: found });
+      }
+    }
+  });
+}
+module.exports.read = read;
+
+async function edit(req, res) {
+  const userId = req.params.userId;
+  subAdminModel.findOne({ _id: userId }, function (err, found) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (found) {
+        res.render("editSubAdmin", { user: found });
+      }
+    }
+  });
+}
+module.exports.edit = edit;
+
+async function editSave(req, res) {
+  const userId = req.params.userId;
+          subAdminModel.findOneAndUpdate(
+            { _id: userId },
+            { $set: {  name: req.body.name,
+              description: req.body.description,
+              username:req.body.username,
+              personal_token: req.body.token} },
+            (err, found) => {
+              if (err) {
+                console.log(err);
+              } else {
+                if (found) {
+                  res.redirect("/admin/adminpanel/read");
+                } else {
+                  res.send("not found");
+                }
+              }
+            }
+          );
+        }
+module.exports.editSave = editSave;
+
+async function deleteUser(req,res){
+const userId=req.params.userId;
+subAdminModel.findOne({ _id: userId }, function (err, found) {
+  if (err) {
+    console.log(err);
+  } else {
+    if (found) {
+      res.render("deleteSubAdmin", { user: found });
+    }
+  }
+});
+}
+module.exports.deleteUser=deleteUser;
+
+async function yesDeleteUser(req,res){
+  const userId=req.params.userId;
+  console.log(userId);
+  subAdminModel.findByIdAndDelete({_id:userId},function(err,found){
+    if(err){
+      res.send(err);
+    }else{
+      if(found){
+        res.redirect("/admin/adminpanel/read");
+      }else{
+        res.send("not found");
+      }
+    }
+  })
+}
+module.exports.yesDeleteUser=yesDeleteUser;
+
+

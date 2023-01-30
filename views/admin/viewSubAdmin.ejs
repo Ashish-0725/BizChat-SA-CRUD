@@ -1,0 +1,31 @@
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/sideBar.ejs") %>
+
+<div class="center-of-page">
+  
+    <table class="table border">
+        <thead>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Token</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </thead>
+        <%user.forEach(function(user){%>
+         <tbody>
+            <tr>
+                <td><%=user.name%></td>
+                <td><%=user.username%></td>
+                <td><%=user.personal_token%></td>
+                <td><%=user.description%></td>
+                <td><a href="/admin/adminpanel/update/<%=user._id%>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="/admin/adminpanel/delete/<%=user._id%>"><i class="fa-solid fa-trash"></i></a></td>  
+             </tr>
+         </tbody>
+        <%})%>
+    </table>
+</div>
+
+<%-include("../partials/footer.ejs") %>
